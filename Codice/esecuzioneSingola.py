@@ -31,7 +31,7 @@ def computeSolution(L, listOfModules, listOfDemands):
                 err_abs = objValRoundedUpSolution - D.objVal
                 print(objValRoundedUpSolution)
               #  sleep(3)
-                err_apx = (objValRoundedUpSolution - D.objVal) / objValRoundedUpSolution
+                err_rel = (objValRoundedUpSolution - D.objVal) / objValRoundedUpSolution
 
                 print("\n\nTrovata la soluzione ottima!\n")
                 print(f"Valore soluzione corrente: {D.objVal}")
@@ -41,9 +41,9 @@ def computeSolution(L, listOfModules, listOfDemands):
                 for v in D.getVars():
                     print(v.varName, math.ceil(v.x))
                 print(f"Valore dell'errore Assoluto: {err_abs}")
-                print(f"Valore dell'errore Relativo: {err_apx}")
+                print(f"Valore dell'errore Relativo: {err_rel}")
                 endTime = time()
-                return dualObj, objValRoundedUpSolution, D.objVal ,err_abs, err_apx, counter, (endTime - startTime), status
+                return dualObj, objValRoundedUpSolution, D.objVal ,err_abs, err_rel, counter, (endTime - startTime), status
             else:
                 counter += 1
 
