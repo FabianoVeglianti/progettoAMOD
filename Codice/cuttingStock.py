@@ -154,18 +154,13 @@ def resolveSubproblem(listOfDemand, A_R):
     xVar = primal.addVars(len(A_R), vtype=GRB.CONTINUOUS, name ="x", lb=0.0)
     primal.update()
 
-    #for i in range(len(cutScheme)):
-    #    print(xVar[i])
-
     #Funzione obiettivo:
     primal.setObjective(xVar.sum(), GRB.MINIMIZE)
 
     #Vincoli del problema:
 
     npMatA_R = np.matrix(A_R).transpose()
-   # print(npMatA_R)
-   # print(npMatA_R[0,0], npMatA_R[0,1], npMatA_R[0,2], npMatA_R[0,3])
-   #print(len(listOfDemand), len(cutScheme))
+
     demands = primal.addConstrs(sum(xVar[j] * npMatA_R[i,j] for j in range(len(A_R))) >= listOfDemand[i] for i in range(len(listOfDemand)))
 
 
